@@ -1,5 +1,11 @@
 package com.team3.capstone.backend.entity;
 
+import java.time.LocalDateTime;
+import java.util.Set;
+
+import com.team3.capstone.backend.entity.enums.AccountStatus;
+import com.team3.capstone.backend.entity.enums.Role;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -8,30 +14,31 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
-    private String name;
+    @Column(nullable = false)
+    private String fullName;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    private String role; // USER, ADMIN, AGENT
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    // Getters & Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Enumerated(EnumType.STRING)
+    private AccountStatus accountStatus;
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    private LocalDateTime createdAt;
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    @OneToMany(mappedBy = "createdBy")
+    private Set<Ticket> createdTickets;
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    @OneToMany(mappedBy = "assignedTo")
+    private Set<Ticket> assignedTickets;
 
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
+    @OneToMany(mappedBy = "user")
+    private Set<TicketComment> comments;
 }
