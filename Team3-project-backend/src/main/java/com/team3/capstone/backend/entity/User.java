@@ -41,4 +41,84 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<TicketComment> comments;
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public AccountStatus getAccountStatus() {
+		return accountStatus;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public Set<Ticket> getCreatedTickets() {
+		return createdTickets;
+	}
+
+	public Set<Ticket> getAssignedTickets() {
+		return assignedTickets;
+	}
+
+	public Set<TicketComment> getComments() {
+		return comments;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public void setAccountStatus(AccountStatus accountStatus) {
+		this.accountStatus = accountStatus;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public void setCreatedTickets(Set<Ticket> createdTickets) {
+		this.createdTickets = createdTickets;
+	}
+
+	public void setAssignedTickets(Set<Ticket> assignedTickets) {
+		this.assignedTickets = assignedTickets;
+	}
+
+	public void setComments(Set<TicketComment> comments) {
+		this.comments = comments;
+	}
 }
