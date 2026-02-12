@@ -3,6 +3,7 @@ package com.team3.capstone.backend.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.team3.capstone.backend.dto.RegisterRequestDTO;
 import com.team3.capstone.backend.entity.User;
 import com.team3.capstone.backend.entity.enums.Role;
 
@@ -29,4 +30,6 @@ public interface UserService {
 
     // Get users by role
     List<User> getUsersByRole(Role role);
+
+	String registerUser(RegisterRequestDTO request);
 }

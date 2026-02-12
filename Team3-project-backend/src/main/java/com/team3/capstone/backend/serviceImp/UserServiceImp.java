@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team3.capstone.backend.dto.RegisterRequestDTO;
 import com.team3.capstone.backend.entity.User;
 import com.team3.capstone.backend.entity.enums.Role;
 import com.team3.capstone.backend.repository.UserRepository;
@@ -61,4 +62,10 @@ public class UserServiceImp implements UserService {
     public List<User> getUsersByRole(Role role) {
         return userRepository.findByRole(role);
     }
+
+	@Override
+	public String registerUser(RegisterRequestDTO request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
