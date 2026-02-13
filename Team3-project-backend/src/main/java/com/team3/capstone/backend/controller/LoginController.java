@@ -1,51 +1,64 @@
 package com.team3.capstone.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import com.team3.capstone.backend.config.JwtUtil;
+import com.team3.capstone.backend.dto.LoginRequestDTO;
+import com.team3.capstone.backend.dto.LoginResponseDTO;
+import com.team3.capstone.backend.entity.User;
 import com.team3.capstone.backend.repository.UserRepository;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "*")
 public class LoginController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
 
     @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
-    private UserRepository userRepository;
+    public LoginController(AuthenticationManager authenticationManager,
+                           JwtUtil jwtUtil,
+                           UserRepository userRepository) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(
-            @RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponseDTO> login(
+            @RequestBody LoginRequestDTO request) {
 
-        // 1. Authenticate username & password
+        // 1️ Authenticate user
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
-                        request.getPassword())
+                        request.getPassword()
+                )
         );
 
-        // 2. Fetch user from DB
-        User user = userRepository
-                .findByUsername(request.getUsername())
-                .orElseThrow();
+        // 2️ Fetch user from database
+        User user = userRepository.findByUsername(request.getUsername());
 
-        // 3. Generate JWT token
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+
+
+
+        // 3️ Generate JWT Token
         String token = jwtUtil.generateToken(user.getUsername());
 
-        // 4. Send token + role
+        // 4️ Return response
         return ResponseEntity.ok(
-                new LoginResponse(token, user.getRole())
+                new LoginResponseDTO(token, user.getRole().name())
         );
+
     }
 }

@@ -121,4 +121,9 @@ public class User {
 	public void setComments(Set<TicketComment> comments) {
 		this.comments = comments;
 	}
+
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

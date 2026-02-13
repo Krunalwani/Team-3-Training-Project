@@ -1,28 +1,37 @@
 package com.team3.capstone.backend.dto;
 
+import com.team3.capstone.backend.entity.Priority;
+import com.team3.capstone.backend.entity.enums.TicketStatus;
+
 public class AgentTicketResponseDTO {
 
     private Long id;
     private String title;
     private String description;
-    private String status;
+    private TicketStatus status;
     private Long userId;
     private Long agentId;
+	private Priority priority;
+	private String createdByUsername;
+	private String assignedToUsername;
 
-    // Empty Constructor (Required)
+    // Empty Constructor
     public AgentTicketResponseDTO() {
     }
 
     // Parameterized Constructor
     public AgentTicketResponseDTO(Long id, String title, String description,
-                                  String status, Long userId, Long agentId) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.userId = userId;
-        this.agentId = agentId;
-    }
+            TicketStatus status, Priority priority,
+            String createdByUsername, String assignedToUsername) {
+    			this.id = id;
+    			this.title = title;
+			this.description = description;
+			this.status = status;
+			this.priority = priority;
+			this.createdByUsername = createdByUsername;
+			this.assignedToUsername = assignedToUsername;
+}
+
 
     // Getters and Setters
 
@@ -50,11 +59,11 @@ public class AgentTicketResponseDTO {
         this.description = description;
     }
 
-    public String getStatus() {
+    public TicketStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus1(TicketStatus status) {
         this.status = status;
     }
 
@@ -73,4 +82,11 @@ public class AgentTicketResponseDTO {
     public void setAgentId(Long agentId) {
         this.agentId = agentId;
     }
+
+	public void setStatus(TicketStatus status) {
+	
+		
+	}
+
+
 }

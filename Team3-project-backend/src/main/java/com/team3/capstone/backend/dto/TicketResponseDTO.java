@@ -1,12 +1,12 @@
 package com.team3.capstone.backend.dto;
 
-public class AssignTicketResponseDTO {
+public class TicketResponseDTO {
 
     private String message;
     private Long ticketId;
     private String assignedAgent;
 
-    public AssignTicketResponseDTO(String message,
+    public TicketResponseDTO(String message,
                                    Long ticketId,
                                    String assignedAgent) {
         this.message = message;

@@ -65,7 +65,6 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public String registerUser(RegisterRequestDTO request) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
