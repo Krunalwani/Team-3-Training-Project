@@ -1,7 +1,6 @@
 package com.team3.capstone.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,33 +31,22 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(
-            @RequestBody LoginRequestDTO request) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO request) {
 
-        // 1️ Authenticate user
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
-        );
+        // 1. Fetch user manually
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // 2️ Fetch user from database
-        User user = userRepository.findByUsername(request.getUsername());
-
-        if (user == null) {
-            throw new RuntimeException("User not found");
+        // 2. Check password manually
+        if (!user.getPassword().equals(request.getPassword())) {
+            throw new RuntimeException("Invalid password");
         }
 
+        // 3. Generate token
+        String token = jwtUtil.generateToken(user.getEmail());
 
-
-        // 3️ Generate JWT Token
-        String token = jwtUtil.generateToken(user.getUsername());
-
-        // 4️ Return response
-        return ResponseEntity.ok(
-                new LoginResponseDTO(token, user.getRole().name())
-        );
-
+        // 4. Return response
+        return ResponseEntity.ok(new LoginResponseDTO(token, user.getRole().name()));
     }
+
 }

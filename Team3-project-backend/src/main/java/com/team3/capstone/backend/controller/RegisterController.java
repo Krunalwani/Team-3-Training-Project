@@ -8,6 +8,7 @@ import com.team3.capstone.backend.service.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "*")
 public class RegisterController {
 
     @Autowired

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+    <h2>User Dashboard</h2>
+
+    <div class="create-ticket-box">
+        <input type="text" id="title" placeholder="Issue title">
+        <textarea id="description" placeholder="Describe your issue"></textarea>
+
+        <input type="text" id="category" placeholder="Category">
+        <input type="text" id="priority" placeholder="Priority (LOW, MEDIUM, HIGH)">
+
+        <button onclick="createTicket()">Create Ticket</button>
+    </div>
+
+    <h3>Your Tickets</h3>
+    <div id="tickets"></div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/user.js"></script>
+
+</body>
+</html>

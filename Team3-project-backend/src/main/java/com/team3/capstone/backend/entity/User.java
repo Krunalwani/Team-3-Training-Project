@@ -17,7 +17,7 @@ public class User {
     private Long userId;
 
     @Column(nullable = false)
-    private String fullName;
+    private String fullName; 
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -124,6 +124,6 @@ public class User {
 
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return email;
 	}
 }

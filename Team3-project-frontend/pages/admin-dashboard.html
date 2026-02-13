@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+    <h2>Admin Dashboard</h2>
+
+    <h3>All Tickets</h3>
+    <div id="tickets"></div>
+
+    <h3>Assign Ticket</h3>
+
+    <input type="number" id="ticketId" placeholder="Ticket ID">
+    <input type="number" id="agentId" placeholder="Agent ID">
+
+    <button onclick="assign()">Assign</button>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/admin.js"></script>
+
+</body>
+</html>
