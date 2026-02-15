@@ -134,13 +134,23 @@ public class Ticket {
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
     private Set<TicketComment> comments;
 
-	public Long getAgentId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public Long getId() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public Long getId() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+//	public Long getAgentId() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	public Long getId() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

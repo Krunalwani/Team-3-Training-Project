@@ -11,21 +11,16 @@ import com.team3.capstone.backend.dto.LoginRequestDTO;
 import com.team3.capstone.backend.dto.LoginResponseDTO;
 import com.team3.capstone.backend.entity.User;
 import com.team3.capstone.backend.repository.UserRepository;
-
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*")
 public class LoginController {
 
-    private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
 
     @Autowired
-    public LoginController(AuthenticationManager authenticationManager,
-                           JwtUtil jwtUtil,
-                           UserRepository userRepository) {
-        this.authenticationManager = authenticationManager;
+    public LoginController(JwtUtil jwtUtil, UserRepository userRepository) {
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
     }
@@ -33,20 +28,25 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO request) {
 
-        // 1. Fetch user manually
+        // 1️⃣ Fetch user
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // 2. Check password manually
+        // 2️⃣ Validate password (plain for now)
         if (!user.getPassword().equals(request.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
 
-        // 3. Generate token
+        // 3️⃣ Generate JWT
         String token = jwtUtil.generateToken(user.getEmail());
 
-        // 4. Return response
-        return ResponseEntity.ok(new LoginResponseDTO(token, user.getRole().name()));
+        // 4️⃣ RETURN token + role + userId ✅
+        return ResponseEntity.ok(
+                new LoginResponseDTO(
+                        token,
+                        user.getRole().name(),
+                        user.getUserId()   // 🔥 THIS FIXES EVERYTHING
+                )
+        );
     }
-
 }

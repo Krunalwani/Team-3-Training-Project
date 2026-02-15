@@ -1,7 +1,6 @@
 package com.team3.capstone.backend.serviceImp;
 
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +18,17 @@ public class TicketServiceImp implements TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
-    //Get all tickets assigned to a specific agent
     @Override
     public List<AgentTicketResponseDTO> getTicketsByAgent(Long agentId) {
 
-        List<Ticket> tickets = ticketRepository.findByAgentId(agentId);
+        List<Ticket> tickets =
+                ticketRepository.findByAssignedTo_UserId(agentId);
 
         return tickets.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    //Update ticket status
     @Override
     public AgentTicketResponseDTO updateTicketStatus(Long ticketId, TicketStatus status) {
 
@@ -39,29 +37,37 @@ public class TicketServiceImp implements TicketService {
 
         ticket.setStatus(status);
 
-        Ticket updatedTicket = ticketRepository.save(ticket);
-
-        return convertToDTO(updatedTicket);
+        return convertToDTO(ticketRepository.save(ticket));
     }
 
-    //Convert Entity to DTO
     private AgentTicketResponseDTO convertToDTO(Ticket ticket) {
 
         AgentTicketResponseDTO dto = new AgentTicketResponseDTO();
-
         dto.setId(ticket.getTicketId());
         dto.setTitle(ticket.getTitle());
         dto.setDescription(ticket.getDescription());
         dto.setStatus(ticket.getStatus());
-        dto.setAgentId(ticket.getAgentId());
+
+        dto.setAgentId(
+                ticket.getAssignedTo() != null
+                        ? ticket.getAssignedTo().getUserId()
+                        : null
+        );
 
         return dto;
     }
 
-	@Override
-	public AgentTicketResponseDTO updateTicketStatus(Long ticketId, String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Ticket getTicketById(Long ticketId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void saveTicket(Ticket ticket) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+    
+    
 }
-

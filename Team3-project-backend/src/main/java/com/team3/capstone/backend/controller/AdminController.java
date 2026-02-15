@@ -5,19 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.team3.capstone.backend.entity.Ticket;
 import com.team3.capstone.backend.entity.User;
+import com.team3.capstone.backend.entity.enums.Role;
 import com.team3.capstone.backend.repository.TicketRepository;
 import com.team3.capstone.backend.repository.UserRepository;
 
 @RestController
-@RequestMapping("/admin")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
@@ -27,13 +25,19 @@ public class AdminController {
     @Autowired
     private UserRepository userRepository;
 
-    // 🔹 Get All Tickets
+    // Get all tickets
     @GetMapping("/tickets")
     public List<Ticket> getAllTickets() {
         return ticketRepository.findAll();
     }
 
-    // 🔹 Assign Ticket to Agent
+    // Get all agents
+    @GetMapping("/agents")
+    public List<User> getAllAgents() {
+        return userRepository.findByRole(Role.AGENT);
+    }
+
+    // Assign ticket
     @PutMapping("/tickets/{ticketId}/assign/{agentId}")
     public ResponseEntity<String> assignTicket(
             @PathVariable Long ticketId,
@@ -45,14 +49,13 @@ public class AdminController {
         User agent = userRepository.findById(agentId)
                 .orElseThrow(() -> new RuntimeException("Agent not found"));
 
-        if (!agent.getRole().equals("AGENT")) {
-            return ResponseEntity.badRequest()
-                    .body("User is not an AGENT");
+        if (!agent.getRole().equals(Role.AGENT)) {
+            return ResponseEntity.badRequest().body("User is not an agent");
         }
 
         ticket.setAssignedTo(agent);
         ticketRepository.save(ticket);
 
-        return ResponseEntity.ok("Ticket assigned successfully");
+        return ResponseEntity.ok("Ticket Assigned Successfully");
     }
 }

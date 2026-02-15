@@ -1,32 +1,123 @@
-async function loadAgentTickets() {
-    let aid = localStorage.getItem("userId");
-    let tickets = await apiGet("/agent/tickets/" + aid);
+const token = localStorage.getItem("token");
+const agentId = localStorage.getItem("userId");
 
-    let box = document.getElementById("agentTickets");
-    box.innerHTML = "";
+const API = "http://localhost:8080/api/agent";
 
-    tickets.forEach(t => {
-        box.innerHTML += `
-            <div class="card">
-                <h3>${t.title}</h3>
-                <p>${t.description}</p>
-
-                <label>Status:</label>
-                <select onchange="updateStatus(${t.ticketId}, this.value)">
-                    <option>OPEN</option>
-                    <option>IN_PROGRESS</option>
-                    <option>RESOLVED</option>
-                    <option>CLOSED</option>
-                </select>
-
-            </div>
-        `;
-    });
+if (!token || !agentId) {
+    alert("Session expired. Login again.");
+    window.location.href = "login.html";
 }
 
+
+// LOAD ASSIGNED TICKETS
+async function loadAssignedTickets() {
+
+    try {
+
+        const response = await fetch(`${API}/tickets/${agentId}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const tickets = await response.json();
+
+        const table = document.getElementById("ticketTableBody");
+
+        table.innerHTML = "";
+
+        tickets.forEach(ticket => {
+
+            const row = `
+                <tr>
+                    <td>${ticket.id}</td>
+                    <td>${ticket.title}</td>
+                    <td>${ticket.description}</td>
+                    <td>${ticket.status}</td>
+
+                    <td>
+                        <select onchange="updateStatus(${ticket.id}, this.value)">
+                            <option value="">Select</option>
+                            <option value="IN_PROGRESS">IN_PROGRESS</option>
+                            <option value="RESOLVED">RESOLVED</option>
+                            <option value="CLOSED">CLOSED</option>
+                        </select>
+                    </td>
+
+                </tr>
+            `;
+
+            table.innerHTML += row;
+
+        });
+
+    }
+    catch (error) {
+
+        console.error(error);
+        alert("Failed to load tickets");
+
+    }
+
+}
+
+
+
+// UPDATE STATUS (FIXED — sends JSON body)
 async function updateStatus(ticketId, status) {
-    await apiPut(`/agent/status/${ticketId}?status=${status}`, {});
-    alert("Status Updated");
+
+    if (!status) return;
+
+    try {
+
+        const response = await fetch(`${API}/tickets/${ticketId}/status`, {
+
+            method: "PUT",
+
+            headers: {
+
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+
+            },
+
+            body: JSON.stringify({
+
+                status: status
+
+            })
+
+        });
+
+        if (!response.ok) {
+
+            throw new Error("Failed to update");
+
+        }
+
+        alert("Status Updated Successfully");
+
+        loadAssignedTickets();
+
+    }
+    catch (error) {
+
+        console.error(error);
+        alert("Update Failed");
+
+    }
+
 }
 
-loadAgentTickets();
+
+// LOGOUT
+function logout() {
+
+    localStorage.clear();
+    window.location.href = "login.html";
+
+}
+
+
+// LOAD ON START
+loadAssignedTickets();

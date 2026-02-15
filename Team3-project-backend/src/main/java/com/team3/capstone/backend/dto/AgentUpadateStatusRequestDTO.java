@@ -1,13 +1,16 @@
 package com.team3.capstone.backend.dto;
 
+import com.team3.capstone.backend.entity.enums.TicketStatus;
+
 public class AgentUpadateStatusRequestDTO {
-	private String status;
-	
-	public String getStatus() {
-		return status;
-	}
-	
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
+    private TicketStatus status;
+
+    public TicketStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TicketStatus status) {
+        this.status = status;
+    }
 }

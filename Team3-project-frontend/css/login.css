@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+:root {
+    /* Fixed Midnight Mirror Palette */
+    --navy-deep: #05070a;       
+    --electric-blue: #3b82f6;   
+    --cyber-lime: #4ade80;      
+    --glass: rgba(15, 20, 28, 0.95);
+    --border: rgba(255, 255, 255, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--navy-deep);
+    /* Subtle ambient glows */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0, transparent 45%),
+        radial-gradient(at 100% 100%, rgba(74, 222, 128, 0.06) 0, transparent 45%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+/* --- THE COMPACT MIRROR BOX --- */
+.login-container {
+    background: var(--glass);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    width: 90%;
+    max-width: 380px; /* Fixed compact width */
+    padding: 2rem;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Mirror Shine Sweep Effect */
+.login-container::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: rotate(45deg);
+    animation: shine 6s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-150%) rotate(45deg); }
+    20% { transform: translateX(150%) rotate(45deg); }
+    100% { transform: translateX(150%) rotate(45deg); }
+}
+
+.brand-logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+}
+
+h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--electric-blue);
+}
+
+/* --- TIGHT STEALTH INPUTS --- */
+input {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: white;
+    font-size: 0.9rem;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+input:focus {
+    border-color: var(--electric-blue);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
+/* --- KHATARNAK BUTTON --- */
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 0.5rem;
+    background: linear-gradient(135deg, #1e3a8a 0%, var(--electric-blue) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.2);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+}
+
+p {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+a {
+    color: var(--cyber-lime);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+a:hover {
+    text-shadow: 0 0 10px var(--cyber-lime);
+}

@@ -63,9 +63,7 @@ public class AgentTicketResponseDTO {
         return status;
     }
 
-    public void setStatus1(TicketStatus status) {
-        this.status = status;
-    }
+  
 
     public Long getUserId() {
         return userId;
@@ -83,10 +81,9 @@ public class AgentTicketResponseDTO {
         this.agentId = agentId;
     }
 
-	public void setStatus(TicketStatus status) {
-	
-		
-	}
+    public void setStatus(TicketStatus status) {
+        this.status = status;
+    }
 
 
 }

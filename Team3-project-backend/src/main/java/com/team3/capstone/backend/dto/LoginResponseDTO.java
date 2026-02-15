@@ -1,31 +1,28 @@
 package com.team3.capstone.backend.dto;
 
 public class LoginResponseDTO {
+
     private String token;
     private String role;
+    private Long userId;
 
-    public LoginResponseDTO(String token, String role) {
+    // ✅ REQUIRED constructor (3 params)
+    public LoginResponseDTO(String token, String role, Long userId) {
         this.token = token;
         this.role = role;
+        this.userId = userId;
     }
-       // getters
-	public String getToken() {
-		return token;
-	}
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    // getters only (no setters needed)
+    public String getToken() {
+        return token;
+    }
 
-	public String getRole() {
-		return role;
-	}
+    public String getRole() {
+        return role;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-    
-    
-
+    public Long getUserId() {
+        return userId;
+    }
 }

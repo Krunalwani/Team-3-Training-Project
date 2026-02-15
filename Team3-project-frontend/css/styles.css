@@ -1,38 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+/* ─────────────────────────────── */
+/*         GLOBAL STYLE            */
+/* ─────────────────────────────── */
+
+:root {
+    --navy-deep: #05070a;       
+    --electric-blue: #3b82f6;   
+    --cyber-lime: #4ade80;      
+    --glass: rgba(15, 20, 28, 0.95);
+    --border: rgba(255, 255, 255, 0.12);
+}
+
 body {
-  font-family: Arial;
-  background: #f2f2f2;
-  padding: 30px;
+  font-family: "Plus Jakarta Sans", Arial, sans-serif;
+  background-color: var(--navy-deep);
+  /* Ambient Glow Background */
+  background-image: 
+      radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(74, 222, 128, 0.07) 0, transparent 50%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
 }
 
-h2, h3 { color: #222; }
+/* ─────────────────────────────── */
+/*            CARD STYLE           */
+/* ─────────────────────────────── */
 
-.login-container, .create-ticket-box {
-  width: 350px;
-  margin: auto;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
+.login-container,
+.create-ticket-box,
+.ticket-card,
+.card {
+  width: 100%;
+  max-width: 380px; /* Locked compact size */
+  margin: 25px auto;
+  padding: 1.8rem 2rem;
+  background: var(--glass);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Mirror Shine Sweep Animation */
+.login-container::after, .ticket-card::after, .card::after {
+    content: '';
+    position: absolute;
+    top: -100%; left: -100%;
+    width: 200%; height: 200%;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: rotate(45deg);
+    animation: shine 6s infinite;
+    pointer-events: none;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-150%) rotate(45deg); }
+    20% { transform: translateX(150%) rotate(45deg); }
+    100% { transform: translateX(150%) rotate(45deg); }
+}
+
+/* Logo */
+.app-logo, .brand-logo {
+  width: 140px;
+  display: block;
+  margin: 0 auto 15px auto;
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
+}
+
+h2, h3 {
+  color: var(--electric-blue);
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* ─────────────────────────────── */
+/*           INPUTS                */
+/* ─────────────────────────────── */
 
 input, textarea, select {
   width: 100%;
+  padding: 11px 16px;
   margin-top: 10px;
-  padding: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: white;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
+
+input:focus, textarea:focus, select:focus {
+  border: 1px solid var(--electric-blue);
+  outline: none;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+/* ─────────────────────────────── */
+/*            BUTTONS              */
+/* ─────────────────────────────── */
 
 button {
-  margin-top: 15px;
+  margin-top: 18px;
   width: 100%;
-  padding: 10px;
-  background: royalblue;
-  color: white;
+  padding: 12px;
+  font-size: 14px;
   border: none;
+  background: linear-gradient(135deg, #1e3a8a 0%, var(--electric-blue) 100%);
+  color: white;
+  border-radius: 12px;
   cursor: pointer;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
 }
 
-.card {
-  background: white;
-  padding: 15px;
-  margin-top: 10px;
+button:hover {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+}
+
+/* ─────────────────────────────── */
+/*       STATUS MESSAGES           */
+/* ─────────────────────────────── */
+
+.success-message {
+  background: rgba(74, 222, 128, 0.1);
+  color: var(--cyber-lime);
+  border: 1px solid var(--cyber-lime);
   border-radius: 8px;
+  padding: 10px;
+  font-size: 0.85rem;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.85rem;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: var(--cyber-lime);
+  font-weight: 700;
+}
+
+a:hover {
+  text-shadow: 0 0 10px var(--cyber-lime);
+}
+
+/* ─────────────────────────────── */
+/*        DASHBOARD LAYOUT        */
+/* ─────────────────────────────── */
+
+.dashboard-wrapper {
+    max-width: 1200px;
+    margin: 100px auto 50px auto;
+    padding: 0 20px;
+}
+
+/* Main layout: Flexbox gap adjusted for compact cards */
+.dashboard-content {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.ticket-list-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+#tickets .card {
+    max-width: 100%;
+    border-left: 5px solid var(--electric-blue);
+    margin-top: 12px;
+    padding: 15px;
 }

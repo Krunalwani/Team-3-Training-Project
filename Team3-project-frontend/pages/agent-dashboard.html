@@ -1,20 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Agent Dashboard</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServXpert | Agent Dashboard</title>
+    <link rel="stylesheet" href="../css/agent-dashboard.css">
 </head>
-
 <body>
 
-    <h2>Agent Dashboard</h2>
+<header class="header">
+    <div class="nav-container">
+        <img src="../logo.png" alt="ServXpert Logo" class="nav-logo">
+        <nav class="nav-links">
+            <div class="user-profile">
+                <div class="profile-icon">AG</div>
+                <span>Agent Portal</span>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </nav>
+    </div>
+</header>
 
-    <h3>Assigned Tickets</h3>
+<main class="container">
+    <section class="card">
+        <div class="card-header">
+            <h3>Assigned Tickets</h3>
+            <span class="ticket-count">Active Tasks</span>
+        </div>
 
-    <div id="agentTickets"></div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="ticketTableBody">
+                    </tbody>
+            </table>
+        </div>
+    </section>
+</main>
 
-    <script src="../js/api.js"></script>
-    <script src="../js/agent.js"></script>
-
+<script src="../js/agent.js"></script>
 </body>
 </html>

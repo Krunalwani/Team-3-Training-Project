@@ -11,16 +11,36 @@ async function login() {
 
         if (!response.ok) {
             document.getElementById('message').innerText = 'Login failed!';
-            return;
+            return;    
         }
 
         const data = await response.json();
-        document.getElementById('message').innerText = 'Login successful! Token: ' + data.token;
+        console.log("Login Response:", data);
 
-        // Save JWT token for API calls
-        localStorage.setItem('jwtToken', data.token);
+        // ✅ SAVE EVERYTHING (MANDATORY)
+        localStorage.setItem('token', data.token);     // 🔥 FIX
+        localStorage.setItem('role', data.role);
+        localStorage.setItem('userId', data.userId);   // 🔥 FIX
+
+        document.getElementById('message').innerText =
+            'Login successful! Redirecting...';
+
+        // ✅ ROLE BASED REDIRECTION
+        if (data.role === "ADMIN") {
+            window.location.href = "admin-dashboard.html";
+        } 
+        else if (data.role === "AGENT") {
+            window.location.href = "agent-dashboard.html";
+        } 
+        else if (data.role === "USER") {
+            window.location.href = "user-dashboard.html";
+        } 
+        else {
+            document.getElementById('message').innerText = "Unknown role!";
+        }
 
     } catch (err) {
-        document.getElementById('message').innerText = 'Error: ' + err.message;
+        document.getElementById('message').innerText =
+            'Error: ' + err.message;
     }
 }

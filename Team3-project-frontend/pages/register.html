@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="../css/styles.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServXpert | Register</title>
+    <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
     <div class="login-container">
+        <img src="../logo.png" alt="ServXpert Logo" class="brand-logo">
+        
         <h2>Register</h2>
         <input type="text" id="name" placeholder="Full Name">
         <input type="email" id="email" placeholder="Email">
         <input type="password" id="password" placeholder="Password">
+        
         <select id="role">
+            <option value="" disabled selected>Select Your Role</option>
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
             <option value="AGENT">Agent</option>
         </select>
+
         <button type="button" onclick="register()">Register</button>
         
         <div class="message" id="message"></div>

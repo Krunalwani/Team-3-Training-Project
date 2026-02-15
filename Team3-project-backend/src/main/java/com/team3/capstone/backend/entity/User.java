@@ -3,6 +3,7 @@ package com.team3.capstone.backend.entity;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.team3.capstone.backend.entity.enums.AccountStatus;
 import com.team3.capstone.backend.entity.enums.Role;
 
@@ -17,7 +18,7 @@ public class User {
     private Long userId;
 
     @Column(nullable = false)
-    private String fullName; 
+    private String fullName;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -33,97 +34,90 @@ public class User {
 
     private LocalDateTime createdAt;
 
+    // -------------------------
+    // STOP INFINITE RECURSION
+    // -------------------------
+    @JsonIgnore
     @OneToMany(mappedBy = "createdBy")
     private Set<Ticket> createdTickets;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "assignedTo")
     private Set<Ticket> assignedTickets;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<TicketComment> comments;
 
-	public Long getUserId() {
-		return userId;
-	}
+    // -------------------------
+    // GETTERS & SETTERS
+    // -------------------------
 
-	public String getFullName() {
-		return fullName;
-	}
+    public Long getUserId() {
+        return userId;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getFullName() {
+        return fullName;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public Role getRole() {
-		return role;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public AccountStatus getAccountStatus() {
-		return accountStatus;
-	}
+    public Role getRole() {
+        return role;
+    }
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
 
-	public Set<Ticket> getCreatedTickets() {
-		return createdTickets;
-	}
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-	public Set<Ticket> getAssignedTickets() {
-		return assignedTickets;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public Set<TicketComment> getComments() {
-		return comments;
-	}
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	public void setAccountStatus(AccountStatus accountStatus) {
-		this.accountStatus = accountStatus;
-	}
+    public String getUsername() {
+        return email;
+    }
 
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public void setCreatedTickets(Set<Ticket> createdTickets) {
-		this.createdTickets = createdTickets;
-	}
-
-	public void setAssignedTickets(Set<Ticket> assignedTickets) {
-		this.assignedTickets = assignedTickets;
-	}
-
-	public void setComments(Set<TicketComment> comments) {
-		this.comments = comments;
-	}
-
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return email;
-	}
+    public Long getId() {
+        return userId;
+    }
+    
+    public Set<Ticket> getCreatedTickets() {
+        return createdTickets;
+    }
 }

@@ -11,8 +11,8 @@ import com.team3.capstone.backend.entity.Priority;
 public interface PriorityRepository extends JpaRepository<Priority, Long> {
 
     // Find priority by level (LOW, MEDIUM, HIGH)
-    Optional<Priority> findByPriorityLevel(String priorityLevel);
+    Optional<Priority> findByPriorityName(String priorityName);
 
     // Check if priority already exists
-    boolean existsByPriorityLevel(String priorityLevel);
+    boolean existsByPriorityName(String priorityName);
 }

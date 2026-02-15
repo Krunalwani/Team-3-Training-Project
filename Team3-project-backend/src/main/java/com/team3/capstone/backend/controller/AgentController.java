@@ -6,25 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.team3.capstone.backend.dto.AgentTicketResponseDTO;
+import com.team3.capstone.backend.dto.AgentUpadateStatusRequestDTO;
 import com.team3.capstone.backend.service.TicketService;
 
-import com.team3.capstone.backend.dto.AgentUpadateStatusRequestDTO;
-
 @RestController
-@RequestMapping("/agent")
+@RequestMapping("/api/agent")
+@CrossOrigin(origins = "*")
 public class AgentController {
 
     @Autowired
     private TicketService ticketService;
 
-    //View assigned tickets
-    @GetMapping("/ticket/{agentId}")
+    // 1️⃣ View tickets assigned to agent
+    @GetMapping("/tickets/{agentId}")
     public List<AgentTicketResponseDTO> getAgentTickets(@PathVariable Long agentId) {
         return ticketService.getTicketsByAgent(agentId);
     }
 
-    //Update ticket status
-    @PutMapping("/update-status/{ticketId}")
+    // 2️⃣ Update ticket status
+    @PutMapping("/tickets/{ticketId}/status")
     public AgentTicketResponseDTO updateStatus(
             @PathVariable Long ticketId,
             @RequestBody AgentUpadateStatusRequestDTO requestDTO) {

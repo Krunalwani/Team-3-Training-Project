@@ -29,7 +29,7 @@ public class AdminControllerUsingDTO {
 
         return tickets.stream()
                 .map(ticket -> new AgentTicketResponseDTO(
-                        ticket.getId(),
+                		ticket.getTicketId(),
                         ticket.getTitle(),
                         ticket.getDescription(),
                         ticket.getStatus(),

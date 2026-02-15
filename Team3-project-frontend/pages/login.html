@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServXpert | Login</title>
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
     <div class="login-container">
+        <img src="../logo.png" alt="ServXpert Logo" class="brand-logo">
+        
         <h2>Login</h2>
         <input type="email" id="email" placeholder="Email">
         <input type="password" id="password" placeholder="Password">
+        
         <button onclick="login()">Login</button>
+        
         <div class="message" id="message"></div>
         <p>Not registered? <a href="register.html">Register here</a></p>
     </div>

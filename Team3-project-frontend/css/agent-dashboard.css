@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+:root {
+    --navy-deep: #05070a;       
+    --electric-blue: #3b82f6;   
+    --cyber-lime: #4ade80;      
+    --glass: rgba(15, 20, 28, 0.95);
+    --border: rgba(255, 255, 255, 0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--navy-deep);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0, transparent 45%),
+        radial-gradient(at 100% 100%, rgba(74, 222, 128, 0.08) 0, transparent 45%);
+    color: white;
+    min-height: 100vh;
+}
+
+/* --- NAV (Mirror Style) --- */
+.header {
+    background: rgba(10, 14, 20, 0.85);
+    backdrop-filter: blur(20px);
+    padding: 0.6rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    height: 60px;
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    color: var(--electric-blue);
+}
+
+.profile-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--electric-blue);
+    color: white;
+    border-radius: 10px; /* Slightly squared per your preference */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+
+.logout-btn {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #ef4444;
+    color: white;
+}
+
+/* --- MAIN CONTENT & OBSIDIAN CARDS --- */
+.container {
+    max-width: 1300px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.card {
+    background: var(--glass);
+    backdrop-filter: blur(30px);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Card Shine Effect */
+.card::after {
+    content: '';
+    position: absolute;
+    top: -100%; left: -100%;
+    width: 200%; height: 200%;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.04), transparent);
+    transform: rotate(45deg);
+    animation: shine 7s infinite;
+    pointer-events: none;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-150%) rotate(45deg); }
+    25% { transform: translateX(150%) rotate(45deg); }
+    100% { transform: translateX(150%) rotate(45deg); }
+}
+
+.card-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+h3 {
+    color: var(--electric-blue);
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ticket-count {
+    background: rgba(59, 130, 246, 0.1);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--cyber-lime);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+/* --- ADMIN TABLE (Stealth Style) --- */
+.table-responsive { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; }
+
+th {
+    background: rgba(0, 0, 0, 0.2);
+    text-align: left;
+    padding: 16px 20px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+    color: #e2e8f0;
+}
+
+tr:hover { background-color: rgba(59, 130, 246, 0.05); }
+
+/* Status & Action Buttons */
+.status-pill {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--electric-blue);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+#ticketTableBody button {
+    background: linear-gradient(135deg, #1e3a8a 0%, var(--electric-blue) 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+#ticketTableBody button:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+}

@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+:root {
+    --navy-deep: #0a0e14;       
+    --electric-blue: #3b82f6;   
+    --cyber-lime: #4ade80;      
+    --glass: rgba(15, 20, 28, 0.95);
+    --border: rgba(255, 255, 255, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--navy-deep);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(74, 222, 128, 0.07) 0, transparent 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- THE COMPACT CONTAINER --- */
+.login-container {
+    background: var(--glass);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    width: 90%;
+    max-width: 380px; /* Slimmer width */
+    padding: 1.8rem 2rem; /* Reduced vertical padding from 3rem to 1.8rem */
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+.brand-logo {
+    width: 140px; /* Smaller logo to save height */
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
+}
+
+h2 {
+    font-size: 1.2rem; /* Slightly smaller text */
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    color: white;
+}
+
+/* --- TIGHTER FORM FIELDS --- */
+input, select {
+    width: 100%;
+    padding: 11px 16px; /* Reduced from 15px to 11px */
+    margin-bottom: 0.8rem; /* Reduced from 1.25rem to 0.8rem */
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: white;
+    font-size: 0.9rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: var(--electric-blue);
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
+/* --- THE BUTTON --- */
+button {
+    width: 100%;
+    padding: 12px; /* Slimmer button */
+    margin-top: 0.5rem;
+    background: linear-gradient(135deg, #1e3a8a 0%, var(--electric-blue) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+p {
+    margin-top: 1.2rem;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+a {
+    color: var(--cyber-lime);
+    text-decoration: none;
+    font-weight: 700;
+}
