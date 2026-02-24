@@ -5,22 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ServXpert | Agent Dashboard</title>
     <link rel="stylesheet" href="../css/agent-dashboard.css">
+     <link rel="stylesheet" href="../css/toast.css">
 </head>
 <body>
 
 <header class="header">
-    <div class="nav-container">
-        <img src="../logo.png" alt="ServXpert Logo" class="nav-logo">
-        <nav class="nav-links">
-            <div class="user-profile">
-                <div class="profile-icon">AG</div>
-                <span>Agent Portal</span>
-            </div>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </nav>
-    </div>
-</header>
 
+    <div class="nav-container">
+
+        <!-- LEFT SIDE -->
+        <div class="nav-left">
+
+            <img src="../logo.png"
+                 alt="ServXpert Logo"
+                 class="nav-logo">
+
+            <div class="nav-title-group">
+
+                <span class="nav-title">
+                    Agent Dashboard
+                </span>
+
+                <span class="nav-subtitle">
+                    ServXpert Support Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="nav-right">
+
+            <div class="user-profile">
+
+                <div class="profile-icon">
+                    AG
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Support Agent
+                    </span>
+
+                    <span class="profile-role">
+                        Ticket Handler
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button class="logout-btn"
+                    onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
 <main class="container">
     <section class="card">
         <div class="card-header">
@@ -47,5 +97,6 @@
 </main>
 
 <script src="../js/agent.js"></script>
+<script src="../js/toast.js"></script>
 </body>
 </html>

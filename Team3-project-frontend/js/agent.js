@@ -4,7 +4,7 @@ const agentId = localStorage.getItem("userId");
 const API = "http://localhost:8080/api/agent";
 
 if (!token || !agentId) {
-    alert("Session expired. Login again.");
+    showToast("Session expired. Login again.", "error");
     window.location.href = "login.html";
 }
 
@@ -55,7 +55,7 @@ async function loadAssignedTickets() {
     catch (error) {
 
         console.error(error);
-        alert("Failed to load tickets");
+        showToast("Failed to load tickets", "error");
 
     }
 
@@ -63,7 +63,7 @@ async function loadAssignedTickets() {
 
 
 
-// UPDATE STATUS (FIXED — sends JSON body)
+// UPDATE STATUS
 async function updateStatus(ticketId, status) {
 
     if (!status) return;
@@ -95,7 +95,7 @@ async function updateStatus(ticketId, status) {
 
         }
 
-        alert("Status Updated Successfully");
+        showToast("Status Updated Successfully", "success");
 
         loadAssignedTickets();
 
@@ -103,7 +103,7 @@ async function updateStatus(ticketId, status) {
     catch (error) {
 
         console.error(error);
-        alert("Update Failed");
+        showToast("Update Failed", "error");
 
     }
 

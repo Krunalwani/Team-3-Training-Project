@@ -2,7 +2,7 @@ const token = localStorage.getItem("token");
 const userId = localStorage.getItem("userId");
 
 if (!token || !userId) {
-    alert("Session expired. Login again.");
+    showToast("Session expired. Login again.", "error");
     window.location.href = "login.html";
 }
 
@@ -12,7 +12,7 @@ async function createTicket() {
     const userId = localStorage.getItem("userId");
 
     if (!token || !userId) {
-        alert("Session expired. Login again.");
+        showToast("Session expired. Login again.", "error");
         window.location.href = "login.html";
         return;
     }
@@ -23,7 +23,7 @@ async function createTicket() {
     const priorityId = document.getElementById("priority").value;
 
     if (!title || !description || !categoryId || !priorityId) {
-        alert("All fields are required");
+        showToast("All fields are required", "warning");
         return;
     }
 
@@ -48,17 +48,17 @@ async function createTicket() {
         if (!response.ok) {
             const error = await response.text();
             console.error("Backend error:", error);
-            alert("Ticket creation failed!");
+            showToast("Ticket creation failed!", "error");
             return;
         }
 
         const data = await response.json();
-        alert(data.message);
+        showToast(data.message, "success");
         loadMyTickets();
 
     } catch (err) {
         console.error("Network error:", err);
-        alert("Server not reachable");
+        showToast("Server not reachable", "error");
     }
 }
 

@@ -10,7 +10,7 @@ async function login() {
         });
 
         if (!response.ok) {
-            document.getElementById('message').innerText = 'Login failed!';
+            showToast('Login failed!', 'error');
             return;    
         }
 
@@ -18,12 +18,11 @@ async function login() {
         console.log("Login Response:", data);
 
         // ✅ SAVE EVERYTHING (MANDATORY)
-        localStorage.setItem('token', data.token);     // 🔥 FIX
+        localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
-        localStorage.setItem('userId', data.userId);   // 🔥 FIX
+        localStorage.setItem('userId', data.userId);
 
-        document.getElementById('message').innerText =
-            'Login successful! Redirecting...';
+        showToast('Login successful! Redirecting...', 'success');
 
         // ✅ ROLE BASED REDIRECTION
         if (data.role === "ADMIN") {
@@ -36,11 +35,10 @@ async function login() {
             window.location.href = "user-dashboard.html";
         } 
         else {
-            document.getElementById('message').innerText = "Unknown role!";
+            showToast("Unknown role!", "error");
         }
 
     } catch (err) {
-        document.getElementById('message').innerText =
-            'Error: ' + err.message;
+        showToast('Error: ' + err.message, 'error');
     }
 }

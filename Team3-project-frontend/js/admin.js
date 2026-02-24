@@ -2,7 +2,7 @@ const token = localStorage.getItem("token");
 const role = localStorage.getItem("role");
 
 if (!token || role !== "ADMIN") {
-    alert("Unauthorized. Please login as Admin.");
+    showToast("Unauthorized. Please login as Admin.", "error");
     window.location.href = "login.html";
 }
 
@@ -23,7 +23,10 @@ function loadAgents() {
         console.log("Agents Loaded: ", agents);
         loadTickets();
     })
-    .catch(err => console.error("Error loading agents:", err));
+    .catch(err => {
+        console.error("Error loading agents:", err);
+        showToast("Failed to load agents", "error");
+    });
 }
 
 // ------------------------------------------------
@@ -38,7 +41,10 @@ function loadTickets() {
         console.log("Tickets:", tickets);
         renderTickets(tickets);
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+        console.error(err);
+        showToast("Failed to load tickets", "error");
+    });
 }
 
 // ------------------------------------------------
@@ -80,7 +86,7 @@ function assignTicket(ticketId) {
     const agentId = document.getElementById(`agent_${ticketId}`).value;
 
     if (!agentId) {
-        alert("Please select an agent!");
+        showToast("Please select an agent!", "warning");
         return;
     }
 
@@ -90,10 +96,13 @@ function assignTicket(ticketId) {
     })
     .then(res => res.json())
     .then(result => {
-        alert(result.message || "Assigned!");
+        showToast(result.message || "Assigned Successfully!", "success");
         loadTickets();
     })
-    .catch(err => console.error("Assign Error:", err));
+    .catch(err => {
+        console.error("Assign Error:", err);
+        showToast("Assignment Failed", "error");
+    });
 }
 
 // Load everything

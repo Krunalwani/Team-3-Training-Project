@@ -1,140 +1,272 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
 :root {
-    /* Fixed Midnight Mirror Palette */
-    --navy-deep: #05070a;       
-    --electric-blue: #3b82f6;   
-    --cyber-lime: #4ade80;      
-    --glass: rgba(15, 20, 28, 0.95);
-    --border: rgba(255, 255, 255, 0.12);
+
+    --primary: #1E4F91;
+    --primary-dark: #163d73;
+
+    --highlight: #4ADE80;
+
+    --background: #F8FAFC;
+
+    --card-bg: rgba(255,255,255,0.95);
+
+    --text-main: #2D2D2D;
+    --text-light: #64748b;
+
+    --border: rgba(0,0,0,0.08);
+
 }
 
+
+/* GLOBAL RESET */
+
 * {
+
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
 }
 
 body {
+
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--navy-deep);
-    /* Subtle ambient glows */
-    background-image: 
-        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0, transparent 45%),
-        radial-gradient(at 100% 100%, rgba(74, 222, 128, 0.06) 0, transparent 45%);
+
+    background:
+    radial-gradient(circle at 0% 0%, rgba(30,79,145,0.06), transparent 40%),
+    radial-gradient(circle at 100% 100%, rgba(74,222,128,0.08), transparent 40%),
+    var(--background);
+
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    color: white;
+
+    min-height: 100vh;
+
+    color: var(--text-main);
+
 }
 
-/* --- THE COMPACT MIRROR BOX --- */
+
+/* LOGIN CONTAINER */
+
 .login-container {
-    background: var(--glass);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    width: 90%;
-    max-width: 380px; /* Fixed compact width */
-    padding: 2rem;
-    border-radius: 24px;
-    border: 1px solid var(--border);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-    text-align: center;
+
     position: relative;
-    overflow: hidden;
+    z-index: 1;
+
+    background: var(--card-bg);
+
+    backdrop-filter: blur(14px);
+
+    width: 90%;
+    max-width: 400px;
+
+    padding: 2rem;
+
+    border-radius: 18px;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 20px 40px rgba(30,79,145,0.12),
+        0 10px 20px rgba(0,0,0,0.05);
+
+    text-align: center;
+
 }
 
-/* Mirror Shine Sweep Effect */
-.login-container::after {
-    content: '';
+
+/* PREMIUM BORDER GLOW (FIXED VERSION) */
+
+.login-container::before {
+
+    content: "";
+
     position: absolute;
-    top: -100%;
-    left: -100%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.05), transparent);
-    transform: rotate(45deg);
-    animation: shine 6s infinite;
+
+    inset: 0;
+
+    border-radius: 18px;
+
+    padding: 1px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(30,79,145,0.25),
+        rgba(74,222,128,0.25)
+    );
+
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    pointer-events: none;
+
 }
 
-@keyframes shine {
-    0% { transform: translateX(-150%) rotate(45deg); }
-    20% { transform: translateX(150%) rotate(45deg); }
-    100% { transform: translateX(150%) rotate(45deg); }
-}
+
+/* LOGO */
 
 .brand-logo {
+
     width: 150px;
-    height: auto;
-    margin-bottom: 1rem;
-    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+
+    margin-bottom: 1.2rem;
+
+    transition: 0.3s;
+
 }
+
+.brand-logo:hover {
+
+    transform: scale(1.05);
+
+}
+
+
+/* TITLE */
 
 h2 {
-    font-size: 1.2rem;
+
+    font-size: 1.5rem;
+
     font-weight: 800;
+
     margin-bottom: 1.5rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--electric-blue);
+
+    color: var(--primary);
+
 }
 
-/* --- TIGHT STEALTH INPUTS --- */
+
+/* INPUT FIELDS */
+
 input {
+
     width: 100%;
-    padding: 12px 16px;
+
+    padding: 12px 14px;
+
     margin-bottom: 1rem;
-    background: rgba(0, 0, 0, 0.3);
+
+    background: white;
+
     border: 1px solid var(--border);
-    border-radius: 12px;
-    color: white;
-    font-size: 0.9rem;
+
+    border-radius: 10px;
+
+    font-size: 0.95rem;
+
+    color: var(--text-main);
+
     outline: none;
-    transition: 0.3s ease;
+
+    transition: all 0.25s ease;
+
 }
+
 
 input:focus {
-    border-color: var(--electric-blue);
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 3px rgba(30,79,145,0.08);
+
 }
 
-/* --- KHATARNAK BUTTON --- */
+
+/* LOGIN BUTTON */
+
 button {
+
     width: 100%;
-    padding: 14px;
+
+    padding: 13px;
+
     margin-top: 0.5rem;
-    background: linear-gradient(135deg, #1e3a8a 0%, var(--electric-blue) 100%);
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
     color: white;
+
     border: none;
-    border-radius: 12px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: 0.85rem;
+
+    border-radius: 10px;
+
+    font-weight: 700;
+
+    font-size: 0.9rem;
+
     cursor: pointer;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    box-shadow: 0 6px 18px rgba(30,79,145,0.25);
+
+    transition: all 0.3s ease;
+
 }
+
 
 button:hover {
+
     transform: translateY(-2px);
-    filter: brightness(1.2);
-    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+
+    box-shadow: 0 10px 25px rgba(30,79,145,0.35);
+
 }
+
+
+/* TEXT */
 
 p {
-    margin-top: 1.5rem;
-    font-size: 0.8rem;
-    color: #94a3b8;
+
+    margin-top: 1.4rem;
+
+    font-size: 0.85rem;
+
+    color: var(--text-light);
+
 }
 
+
+/* LINK */
+
 a {
-    color: var(--cyber-lime);
-    text-decoration: none;
+
+    color: var(--highlight);
+
     font-weight: 700;
+
+    text-decoration: none;
+
 }
 
 a:hover {
-    text-shadow: 0 0 10px var(--cyber-lime);
+
+    text-decoration: underline;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+    .login-container {
+
+        padding: 1.5rem;
+
+    }
+
 }

@@ -5,20 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ServXpert | Dashboard</title>
     <link rel="stylesheet" href="../css/user-dashboard.css">
+    <link rel="stylesheet" href="../css/toast.css">
 </head>
 <body>
 
 <header class="header">
+
     <div class="nav-container">
-        <img src="../logo.png" alt="ServXpert Logo" class="nav-logo">
-        <nav class="nav-links">
-            <div class="user-profile">
-                <div class="profile-icon">P</div>
-                <span id="userNameDisplay">Profile</span>
+
+        <!-- LEFT SIDE -->
+        <div class="nav-left">
+
+            <img src="../logo.png"
+                 alt="ServXpert Logo"
+                 class="nav-logo">
+
+            <div class="nav-title-group">
+
+                <span class="nav-title">
+                    User Dashboard
+                </span>
+
+                <span class="nav-subtitle">
+                    ServXpert Support Center
+                </span>
+
             </div>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </nav>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="nav-right">
+
+            <div class="user-profile">
+
+                <div class="profile-icon">
+                    P
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name"
+                          id="userNameDisplay">
+                        Profile
+                    </span>
+
+                    <span class="profile-role">
+                        Customer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button class="logout-btn"
+                    onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
     </div>
+
 </header>
 
 <main class="container">
@@ -70,6 +122,8 @@
 </main>
 
 <script src="../js/user.js"></script>
+<script src="../js/toast.js"></script>
+
 
 </body>
 </html>

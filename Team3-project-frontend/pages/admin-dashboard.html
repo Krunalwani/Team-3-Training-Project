@@ -5,23 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ServXpert | Admin Dashboard</title>
     <link rel="stylesheet" href="../css/admin-dashboard.css">
+     <link rel="stylesheet" href="../css/toast.css">
 </head>
 
 <body>
 
     <header class="header">
-        <div class="nav-container">
-            <img src="../logo.png" alt="ServXpert Logo" class="nav-logo">
-            <h1 class="title">Admin Dashboard</h1>
-            <nav class="nav-links">
-                <div class="user-profile">
-                    <div class="profile-icon">AD</div>
-                    <span>System Admin</span>
-                </div>
-                <button class="logout-btn" onclick="logout()">Logout</button>
-            </nav>
+
+    <div class="nav-container">
+
+        <!-- Left Section (Logo + Title) -->
+        <div class="nav-left">
+
+            <img src="../logo.png"
+                 alt="ServXpert Logo"
+                 class="nav-logo">
+
+            <div class="nav-title-group">
+
+                <span class="nav-title">
+                    Admin Dashboard
+                </span>
+
+                <span class="nav-subtitle">
+                    ServXpert Control Panel
+                </span>
+
+            </div>
+
         </div>
-    </header>
+
+
+        <!-- Right Section (Profile + Logout) -->
+        <div class="nav-right">
+
+            <div class="user-profile">
+
+                <div class="profile-icon">
+                    AD
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        System Admin
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button class="logout-btn"
+                    onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
 
     <div class="container">
         <div class="table-card">
@@ -43,6 +93,7 @@
     </div>
 
     <script src="../js/admin.js"></script>
+    <script src="../js/toast.js"></script>
 
 </body>
 </html>

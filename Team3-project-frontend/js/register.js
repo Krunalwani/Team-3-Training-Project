@@ -4,8 +4,6 @@ async function register() {
     const password = document.getElementById('password').value;
     const role = document.getElementById('role').value;
 
-    const messageDiv = document.getElementById('message');
-
     try {
         const response = await fetch('http://localhost:8080/api/auth/register', {
             method: 'POST',
@@ -15,20 +13,26 @@ async function register() {
 
         const message = await response.text();
 
-        // Show message in green if success, red if error
-        messageDiv.innerText = message;
-        messageDiv.style.color = message.toLowerCase().includes('successfully') ? 'green' : 'red';
-
+        // Toast instead of messageDiv
         if (response.ok && message.toLowerCase().includes('successfully')) {
+
+            showToast(message, "success");
+
             // Clear input fields after successful registration
             document.getElementById('name').value = '';
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
             document.getElementById('role').value = 'USER';
+
+        } else {
+
+            showToast(message, "error");
+
         }
 
     } catch (err) {
-        messageDiv.innerText = 'Error: ' + err.message;
-        messageDiv.style.color = 'red';
+
+        showToast("Error: " + err.message, "error");
+
     }
 }
